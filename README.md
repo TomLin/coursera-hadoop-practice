@@ -1,2 +1,2 @@
-# Git_practice_hadoop_essentials
-the big data course from coursera
+# Practice Assignments for Hadoop Essentials from Coursera
+The big data course from coursera.
