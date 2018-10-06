@@ -157,6 +157,9 @@ dfWithDate.createOrReplaceTempView("dfWithDate")
 
 # COMMAND ----------
 
+# 記住，window function通常不會改變原有的dataframe的row數量，而是在原有資料表中，多增加一個欄位
+# 通常它會出現在select()裡面
+
 from pyspark.sql.window import Window
 from pyspark.sql.functions import desc
 windowSpec = Window\
@@ -227,5 +230,16 @@ dfNoNull.cube("Date", "Country").agg(sum(col("Quantity")))\
 
 pivoted = dfWithDate.groupBy("date").pivot("Country").sum()
 # from long dateset to wide dataset
+
+# pivot() will use the groupby column as rows and pivot column as columns, 
+# and compute all numerical columns for the (gorupby row- pivot column) pair.
+
+# pivot(pivot_col, values=None):
+# we can also specify what values should be included in the pivot column,
+# for example, if we only need the pivot for UK, USA, then we can specify in this way:
+# pivot("Country", ["UK", "USA"])
+
+
+
 
 # COMMAND ----------
